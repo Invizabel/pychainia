@@ -14,55 +14,30 @@ def pychainia():
     pygame.display.set_caption("Pychainia")
     display = pygame.display.set_mode((128, 64),pygame.FULLSCREEN | pygame.SCALED)
 
-    if "ANDROID_STORAGE" in os.environ or "ANDROID_ARGUMENT" in os.environ:
-        try:
-            from android.storage import app_storage_path
-            peashooter_img = os.path.join(PATH, "assets", "peashooter.png")
-            peashooter_img = pygame.image.load(peashooter_img).convert_alpha()
-
-            sunflower_img = os.path.join(PATH, "assets", "sunflower.png")
-            sunflower_img = pygame.image.load(sunflower_img).convert_alpha()
-
-            cherrybomb_img = os.path.join(PATH, "assets", "cherrybomb.png")
-            cherrybomb_img = pygame.image.load(cherrybomb_img).convert_alpha()
-
-            walnut_img = os.path.join(PATH, "assets", "walnut.png")
-            walnut_img = pygame.image.load(walnut_img).convert_alpha()
-
-            potatomine_img = os.path.join(PATH, "assets", "potatomine.png")
-            potatomine_img = pygame.image.load(potatomine_img).convert_alpha()
-
-            grasswalk_song = os.path.join(PATH, "assets", "Grasswalk.mp3")
-            pygame.mixer.music.load(grasswalk_song)
-            pygame.mixer.music.play(-1)
-
-        except:
-            # wait 30 seconds to indicate files not found! :)
-            time.sleep(30)
-            sys.exit()
-
-
-    else:
-        PATH = os.path.dirname(__file__)
-
-        peashooter_img = os.path.join(PATH, "assets", "peashooter.png")
-        peashooter_img = pygame.image.load(peashooter_img).convert_alpha()
-
-        sunflower_img = os.path.join(PATH, "assets", "sunflower.png")
-        sunflower_img = pygame.image.load(sunflower_img).convert_alpha()
-
-        cherrybomb_img = os.path.join(PATH, "assets", "cherrybomb.png")
-        cherrybomb_img = pygame.image.load(cherrybomb_img).convert_alpha()
-
-        walnut_img = os.path.join(PATH, "assets", "walnut.png")
-        walnut_img = pygame.image.load(walnut_img).convert_alpha()
-
-        potatomine_img = os.path.join(PATH, "assets", "potatomine.png")
-        potatomine_img = pygame.image.load(potatomine_img).convert_alpha()
-
-        grasswalk_song = os.path.join(PATH, "assets", "Grasswalk.mp3")
-        pygame.mixer.music.load(grasswalk_song)
+    try:
+        from kivy.resources import resource_find
+        peashooter_img = pygame.image.load(resource_find("assets/peashooter.png")).convert_alpha()
+        sunflower_img = pygame.image.load(resource_find("assets/sunflower.png")).convert_alpha()
+        cherrybomb_img = pygame.image.load(resource_find("assets/cherrybomb.png")).convert_alpha()
+        walnut_img = pygame.image.load(resource_find("assets/walnut.png")).convert_alpha()
+        potatomine_img = pygame.image.load(resource_find("assets/potatomine.png")).convert_alpha()
+        pygame.mixer.music.load(resource_find("assets/Grasswalk.mp3"))
         pygame.mixer.music.play(-1)
+
+
+    except Exception as error:
+        # if we can't find the files, display RED! :)
+        my_font = pygame.font.SysFont("calibri", 11)
+        while True:
+            display.fill("RED")
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            error_font = my_font.render(f"DEBUG: {error}", False, "BLACK")
+            display.blit(error_font, (0, 0))
+            pygame.display.update()
     
     my_font = pygame.font.SysFont("calibri", 8)
     cooldown_font = pygame.font.SysFont("calibri", 20)
