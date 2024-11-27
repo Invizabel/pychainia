@@ -8,24 +8,40 @@ from pygame.locals import *
 def pychainia():
     pygame.init()
     pygame.display.set_caption("Pychainia")
-    display = pygame.display.set_mode((128, 64), pygame.SCALED)
+    display = pygame.display.set_mode((128, 64),pygame.FULLSCREEN | pygame.SCALED)
 
-    base_dir = os.path.dirname(__file__)
+    if "ANDROID_STORAGE" in os.environ or "ANDROID_ARGUMENT" in os.environ:
+        try:
+            PATH = "/data/data/com.pychainia/files/app/"
+            peashooter_img = pygame.image.load(PATH + "peashooter.jpg").convert_alpha()
+            sunflower_img = pygame.image.load(PATH + "sunflower.jpg").convert_alpha()
+            cherrybomb_img = pygame.image.load(PATH + "cherrybomb.jpg").convert_alpha()
+            walnut_img = pygame.image.load(PATH + "walnut.jpg").convert_alpha()
+            potatomine_img = pygame.image.load(PATH + "potatomine.jpg").convert_alpha()
 
-    peashooter_img = os.path.join(base_dir, "assets", "peashooter.png")
-    peashooter_img = pygame.image.load(peashooter_img).convert_alpha()
+        except:
+            # wait 15 seconds to indicate files not found! :)
+            time.sleep(15)
+            sys.exit()
 
-    sunflower_img = os.path.join(base_dir, "assets", "sunflower.png")
-    sunflower_img = pygame.image.load(sunflower_img).convert_alpha()
 
-    cherrybomb_img = os.path.join(base_dir, "assets", "cherrybomb.png")
-    cherrybomb_img = pygame.image.load(cherrybomb_img).convert_alpha()
+    else:
+        PATH = os.path.dirname(__file__)
 
-    walnut_img = os.path.join(base_dir, "assets", "walnut.png")
-    walnut_img = pygame.image.load(walnut_img).convert_alpha()
+        peashooter_img = os.path.join(PATH, "assets", "peashooter.png")
+        peashooter_img = pygame.image.load(peashooter_img).convert_alpha()
 
-    potatomine_img = os.path.join(base_dir, "assets", "potatomine.png")
-    potatomine_img = pygame.image.load(potatomine_img).convert_alpha()
+        sunflower_img = os.path.join(PATH, "assets", "sunflower.png")
+        sunflower_img = pygame.image.load(sunflower_img).convert_alpha()
+
+        cherrybomb_img = os.path.join(PATH, "assets", "cherrybomb.png")
+        cherrybomb_img = pygame.image.load(cherrybomb_img).convert_alpha()
+
+        walnut_img = os.path.join(PATH, "assets", "walnut.png")
+        walnut_img = pygame.image.load(walnut_img).convert_alpha()
+
+        potatomine_img = os.path.join(PATH, "assets", "potatomine.png")
+        potatomine_img = pygame.image.load(potatomine_img).convert_alpha()
     
     my_font = pygame.font.SysFont("calibri", 8)
     cooldown_font = pygame.font.SysFont("calibri", 20)
@@ -202,7 +218,7 @@ def pychainia():
         for i,j in enumerate(choices):
             if new_cooldown_key[i] != 0:
                 new_cooldown_font = cooldown_font.render("X", False, "BLACK")
-                display.blit(new_cooldown_font, ((i * 12) + 1, 45))
+                display.blit(new_cooldown_font, ((i * 12) + 1, 50))
 
         # refresh
         pygame.display.update()

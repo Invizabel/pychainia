@@ -1,1 +1,1 @@
-﻿# pychainia is a simple pygame-ce clone based off of plants vs zombies!
+﻿# pychainia is a simple game based off of a popular tower defense game!
