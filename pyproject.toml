@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pychainia"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
   { name="Invizabel"},
 ]
@@ -18,7 +18,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-dependencies = ["pygame-ce"]
+dependencies = ["pygame-ce","Kivy"]
 
 [tool.setuptools.package-data]
 pychainia = ["assets/*"]

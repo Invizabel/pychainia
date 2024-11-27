@@ -3,6 +3,7 @@ import pygame
 import random
 import sys
 import time
+from kivy.utils import platform
 from pygame.locals import *
 
 def pychainia():
@@ -15,18 +16,29 @@ def pychainia():
 
     if "ANDROID_STORAGE" in os.environ or "ANDROID_ARGUMENT" in os.environ:
         try:
-            PATH = "/data/data/com.pychainia/files/app/"
-            peashooter_img = pygame.image.load(PATH + "peashooter.jpg").convert_alpha()
-            sunflower_img = pygame.image.load(PATH + "sunflower.jpg").convert_alpha()
-            cherrybomb_img = pygame.image.load(PATH + "cherrybomb.jpg").convert_alpha()
-            walnut_img = pygame.image.load(PATH + "walnut.jpg").convert_alpha()
-            potatomine_img = pygame.image.load(PATH + "potatomine.jpg").convert_alpha()
-            pygame.mixer.music.load(PATH + "Grasswalk.mp3")
+            from android.storage import app_storage_path
+            peashooter_img = os.path.join(PATH, "assets", "peashooter.png")
+            peashooter_img = pygame.image.load(peashooter_img).convert_alpha()
+
+            sunflower_img = os.path.join(PATH, "assets", "sunflower.png")
+            sunflower_img = pygame.image.load(sunflower_img).convert_alpha()
+
+            cherrybomb_img = os.path.join(PATH, "assets", "cherrybomb.png")
+            cherrybomb_img = pygame.image.load(cherrybomb_img).convert_alpha()
+
+            walnut_img = os.path.join(PATH, "assets", "walnut.png")
+            walnut_img = pygame.image.load(walnut_img).convert_alpha()
+
+            potatomine_img = os.path.join(PATH, "assets", "potatomine.png")
+            potatomine_img = pygame.image.load(potatomine_img).convert_alpha()
+
+            grasswalk_song = os.path.join(PATH, "assets", "Grasswalk.mp3")
+            pygame.mixer.music.load(grasswalk_song)
             pygame.mixer.music.play(-1)
 
         except:
-            # wait 15 seconds to indicate files not found! :)
-            time.sleep(15)
+            # wait 30 seconds to indicate files not found! :)
+            time.sleep(30)
             sys.exit()
 
 
@@ -50,7 +62,7 @@ def pychainia():
 
         grasswalk_song = os.path.join(PATH, "assets", "Grasswalk.mp3")
         pygame.mixer.music.load(grasswalk_song)
-        pygame.mixer.music.play(-1) 
+        pygame.mixer.music.play(-1)
     
     my_font = pygame.font.SysFont("calibri", 8)
     cooldown_font = pygame.font.SysFont("calibri", 20)
