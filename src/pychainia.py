@@ -7,6 +7,9 @@ from pygame.locals import *
 
 def pychainia():
     pygame.init()
+
+    pygame.mixer.init()
+    
     pygame.display.set_caption("Pychainia")
     display = pygame.display.set_mode((128, 64),pygame.FULLSCREEN | pygame.SCALED)
 
@@ -18,6 +21,8 @@ def pychainia():
             cherrybomb_img = pygame.image.load(PATH + "cherrybomb.jpg").convert_alpha()
             walnut_img = pygame.image.load(PATH + "walnut.jpg").convert_alpha()
             potatomine_img = pygame.image.load(PATH + "potatomine.jpg").convert_alpha()
+            pygame.mixer.music.load(PATH + "Grasswalk.mp3")
+            pygame.mixer.music.play(-1)
 
         except:
             # wait 15 seconds to indicate files not found! :)
@@ -42,6 +47,10 @@ def pychainia():
 
         potatomine_img = os.path.join(PATH, "assets", "potatomine.png")
         potatomine_img = pygame.image.load(potatomine_img).convert_alpha()
+
+        grasswalk_song = os.path.join(PATH, "assets", "Grasswalk.mp3")
+        pygame.mixer.music.load(grasswalk_song)
+        pygame.mixer.music.play(-1) 
     
     my_font = pygame.font.SysFont("calibri", 8)
     cooldown_font = pygame.font.SysFont("calibri", 20)

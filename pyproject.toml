@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pychainia"
-version = "0.0.2"
+version = "0.0.4"
 authors = [
   { name="Invizabel"},
 ]
@@ -21,7 +21,7 @@ classifiers = [
 dependencies = ["pygame-ce"]
 
 [tool.setuptools.package-data]
-pychainia = ["assets/*.png"]
+pychainia = ["assets/*"]
 
 [project.urls]
 "Homepage" = "https://github.com/Invizabel/pychainia"
